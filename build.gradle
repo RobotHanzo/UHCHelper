@@ -9,7 +9,7 @@ plugins {
 apply plugin: 'java'
 apply plugin: 'com.github.johnrengelman.shadow'
 group = 'dev.robothanzo'
-version = 'pre-1.0.0'
+version = 'pre3'
 
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
@@ -33,11 +33,13 @@ dependencies {
     compileOnly 'com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT'
     compile 'com.github.thebusybiscuit:CS-CoreLib2:master-SNAPSHOT'
     compile 'com.github.stefvanschie.inventoryframework:IF:0.9.5'
+    compile group: 'commons-io', name: 'commons-io', version: '2.8.0'
 }
 
 shadowJar {
     relocate('io.github.thebusybiscuit.cscorelib2', 'dev.robothanzo.dependencies.cscorelib2')
     relocate('com.github.stefvanschie.inventoryframework', 'dev.robothanzo.dependencies.inventoryframework')
+    relocate('org.apache.commons.io', 'dev.robothanzo.dependencies.commons.io')
 }
 
 tasks.build.dependsOn tasks.shadowJar
