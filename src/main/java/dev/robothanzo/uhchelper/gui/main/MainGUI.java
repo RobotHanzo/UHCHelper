@@ -8,6 +8,7 @@ import dev.robothanzo.uhchelper.gui.cutclean.CutcleanGUI;
 import dev.robothanzo.uhchelper.gui.luckyleaves.LuckyLeavesGUI;
 import dev.robothanzo.uhchelper.gui.noclean.NoCleanGUI;
 import dev.robothanzo.uhchelper.gui.timebomb.TimebombGUI;
+import dev.robothanzo.uhchelper.gui.uhc.UHCGUI;
 import io.github.thebusybiscuit.cscorelib2.config.Config;
 import io.github.thebusybiscuit.cscorelib2.item.CustomItem;
 import org.bukkit.ChatColor;
@@ -20,6 +21,13 @@ public class MainGUI {
         Config cfg = plugin.getCfg();
         ChestGui chestGui = new ChestGui(1, ChatColor.DARK_GRAY + "設定");
         OutlinePane pane = new OutlinePane(0, 0, 9, 1);
+
+        ItemStack uhcItem = UHCGUI.getMainGUIItem();
+        pane.addItem(new GuiItem(uhcItem, e -> {
+            if (e.isRightClick()) {
+                new UHCGUI(plugin, player);
+            }
+        }));
 
         ItemStack timebombItem = TimebombGUI.getMainGUIItem(cfg);
         pane.addItem(new GuiItem(timebombItem, e -> {
