@@ -85,7 +85,7 @@ public class UHCGUI {
                 ChatColor.WHITE + "將跑圖跑至初始邊界");
         pane.addItem(new GuiItem(generateChunkItem, e -> {
             e.setCancelled(true);
-            final Semaphore working = new Semaphore(4);
+            final Semaphore working = new Semaphore(50);
             Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
                 World world = player.getWorld();
                 Chunk centerChunk = player.getChunk();
@@ -105,8 +105,9 @@ public class UHCGUI {
                             PaperLib.getChunkAtAsync(world, finalX, z).thenRun(working::release);
                         }
                         currentChunk.addAndGet(1);
-                        player.sendActionBar(ChatColor.GREEN.toString() + ChatColor.BOLD + "跑圖進度： " + currentChunk + " / " + totalChunks);
-
+                        if (currentChunk.get() % 100 == 0) {
+                            player.sendActionBar(ChatColor.GREEN.toString() + ChatColor.BOLD + "跑圖進度： " + currentChunk + " / " + totalChunks);
+                        }
                     });
                 });
             });
