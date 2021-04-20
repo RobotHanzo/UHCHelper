@@ -1,4 +1,6 @@
 modes:
+  uhc:
+    death-watcher: true
   timebomb:
     enabled: true
     countdown-before-explosion: 20

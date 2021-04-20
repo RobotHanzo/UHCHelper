@@ -10,10 +10,10 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.logging.Level;
 
-public class LeafBreakListener implements Listener {
+public class LuckyleavesLeafBreakListener implements Listener {
     UHCHelper plugin;
 
-    public LeafBreakListener(UHCHelper plg) {
+    public LuckyleavesLeafBreakListener(UHCHelper plg) {
         plugin = plg;
     }
 

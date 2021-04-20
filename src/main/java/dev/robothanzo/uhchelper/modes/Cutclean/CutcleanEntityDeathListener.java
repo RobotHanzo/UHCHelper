@@ -11,10 +11,10 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.Iterator;
 
-public class EntityDeathListener implements Listener {
+public class CutcleanEntityDeathListener implements Listener {
     UHCHelper plugin;
 
-    public EntityDeathListener(UHCHelper plg) {
+    public CutcleanEntityDeathListener(UHCHelper plg) {
         plugin = plg;
     }
 

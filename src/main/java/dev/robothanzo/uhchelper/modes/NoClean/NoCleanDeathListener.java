@@ -10,10 +10,10 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.Arrays;
 
-public class PlayerDeathListener implements Listener {
+public class NoCleanDeathListener implements Listener {
     UHCHelper plugin;
 
-    public PlayerDeathListener(UHCHelper plg) {
+    public NoCleanDeathListener(UHCHelper plg) {
         plugin = plg;
     }
 

@@ -16,10 +16,10 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class DeathListener implements Listener {
+public class TimebombDeathListener implements Listener {
     private final UHCHelper plugin;
 
-    public DeathListener(UHCHelper plugin) {
+    public TimebombDeathListener(UHCHelper plugin) {
         this.plugin = plugin;
     }
 

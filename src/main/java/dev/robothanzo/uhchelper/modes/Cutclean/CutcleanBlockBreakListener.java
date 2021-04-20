@@ -10,9 +10,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class BlockBreakListener implements Listener {
+public class CutcleanBlockBreakListener implements Listener {
     UHCHelper plugin;
-    public BlockBreakListener(UHCHelper plg){
+    public CutcleanBlockBreakListener(UHCHelper plg){
         plugin = plg;
     }
 
