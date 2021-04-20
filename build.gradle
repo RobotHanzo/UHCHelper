@@ -40,6 +40,8 @@ shadowJar {
     relocate('com.github.stefvanschie.inventoryframework', 'dev.robothanzo.dependencies.inventoryframework')
 }
 
+tasks.build.dependsOn tasks.shadowJar
+
 bukkit {
     main = 'dev.robothanzo.uhchelper.UHCHelper'
     apiVersion = '1.16'
