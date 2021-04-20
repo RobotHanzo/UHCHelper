@@ -47,6 +47,7 @@ bukkit {
     apiVersion = '1.16'
     authors = ['RobotHanzo']
     prefix = 'UHCHelper'
+    load = 'STARTUP'
     commands {
         uhchelper {
             description = 'The main command the deals with all the UHCHelper stuff'

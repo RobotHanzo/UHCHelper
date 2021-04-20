@@ -13,3 +13,5 @@ modes:
   noclean:
     enabled: true
     timeout: 5
+settings:
+  cleanup-world: false
