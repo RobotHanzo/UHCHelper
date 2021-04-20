@@ -1,6 +1,10 @@
 modes:
   uhc:
     death-watcher: true
+    border-size: 750
+    border-x: 0
+    border-y: 0
+    border-z: 0
   timebomb:
     enabled: true
     countdown-before-explosion: 20

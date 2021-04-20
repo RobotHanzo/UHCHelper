@@ -23,11 +23,7 @@ public class MainGUI {
         OutlinePane pane = new OutlinePane(0, 0, 9, 1);
 
         ItemStack uhcItem = UHCGUI.getMainGUIItem();
-        pane.addItem(new GuiItem(uhcItem, e -> {
-            if (e.isRightClick()) {
-                new UHCGUI(plugin, player);
-            }
-        }));
+        pane.addItem(new GuiItem(uhcItem, e -> new UHCGUI(plugin, player)));
 
         ItemStack timebombItem = TimebombGUI.getMainGUIItem(cfg);
         pane.addItem(new GuiItem(timebombItem, e -> {

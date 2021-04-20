@@ -31,6 +31,7 @@ repositories {
 
 dependencies {
     compileOnly 'com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT'
+    compile "io.papermc:paperlib:1.0.6"
     compile 'com.github.thebusybiscuit:CS-CoreLib2:master-SNAPSHOT'
     compile 'com.github.stefvanschie.inventoryframework:IF:0.9.5'
     compile group: 'commons-io', name: 'commons-io', version: '2.8.0'
@@ -40,6 +41,7 @@ shadowJar {
     relocate('io.github.thebusybiscuit.cscorelib2', 'dev.robothanzo.dependencies.cscorelib2')
     relocate('com.github.stefvanschie.inventoryframework', 'dev.robothanzo.dependencies.inventoryframework')
     relocate('org.apache.commons.io', 'dev.robothanzo.dependencies.commons.io')
+    relocate('io.papermc.lib', 'dev.robothanzo.dependencies.paperlib')
 }
 
 tasks.build.dependsOn tasks.shadowJar
