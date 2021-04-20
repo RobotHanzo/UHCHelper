@@ -1,0 +1,65 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+plugins {
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
+    id 'net.minecrell.plugin-yml.bukkit' version '0.3.0'
+    id 'java'
+}
+
+apply plugin: 'java'
+apply plugin: 'com.github.johnrengelman.shadow'
+group = 'dev.robothanzo'
+version = '1.0.0'
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+
+repositories {
+    jcenter()
+    mavenCentral()
+    maven {
+        name = 'papermc-repo'
+        url = 'https://papermc.io/repo/repository/maven-public/'
+    }
+    maven {
+        name = 'jitpack.io'
+        url = 'https://jitpack.io'
+    }
+}
+
+dependencies {
+    compileOnly 'com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT'
+    compile 'com.github.thebusybiscuit:CS-CoreLib2:master-SNAPSHOT'
+    compile 'com.github.stefvanschie.inventoryframework:IF:0.9.5'
+}
+
+shadowJar {
+    relocate('io.github.thebusybiscuit.cscorelib2', 'dev.robothanzo.dependencies.cscorelib2')
+    relocate('com.github.stefvanschie.inventoryframework', 'dev.robothanzo.dependencies.inventoryframework')
+}
+
+bukkit {
+    main = 'dev.robothanzo.uhchelper.UHCHelper'
+    apiVersion = '1.16'
+    authors = ['RobotHanzo']
+    prefix = 'UHCHelper'
+    commands {
+        uhchelper {
+            description = 'The main command the deals with all the UHCHelper stuff'
+            usage = '/uhchelper'
+            aliases = ['uhc']
+        }
+        uhc {
+            description = 'The main command the deals with all the UHCHelper stuff'
+            usage = '/uhc'
+        }
+    }
+}
+
+processResources {
+    from(sourceSets.main.resources.srcDirs) {
+        filter ReplaceTokens, tokens: [version: version]
+    }
+}

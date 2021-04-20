@@ -1,0 +1,13 @@
+modes:
+  timebomb:
+    enabled: true
+    countdown-before-explosion: 20
+    explosion-power: 5
+  cutclean:
+    enabled: true
+  luckyleaves:
+    enabled: true
+    golden_apple_chance: 0.01
+  noclean:
+    enabled: true
+    timeout: 5
