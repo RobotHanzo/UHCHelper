@@ -28,7 +28,6 @@ public class UHCDeathListener implements Listener {
                     }
                 });
                 deadPlayer.sendMessage(ChatColor.RED + "你已經死亡並被切換為旁觀者模式");
-                event.setCancelled(true);
             }
         }
     }

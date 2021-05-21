@@ -5,6 +5,11 @@ modes:
     border-x: 0
     border-y: 0
     border-z: 0
+    team-damage: false
+    team-push: true
+    tab-health: true
+    below-name-health: true
+    achievement-notification: false
   timebomb:
     enabled: true
     countdown-before-explosion: 20

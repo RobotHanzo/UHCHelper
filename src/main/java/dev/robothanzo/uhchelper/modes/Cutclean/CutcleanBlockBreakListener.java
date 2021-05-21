@@ -21,16 +21,13 @@ public class CutcleanBlockBreakListener implements Listener {
         if (plugin.getCfg().getBoolean("modes.cutclean.enabled")) {
             Block block = event.getBlock();
             if (block.getType() == Material.IRON_ORE) {
-                event.setCancelled(true);
                 block.setType(Material.AIR);
                 block.getState().update();
                 block.getWorld().playSound(block.getLocation(), Sound.BLOCK_STONE_BREAK, 1, 1);
                 block.getWorld().spawn(block.getLocation(), ExperienceOrb.class).setExperience(1);
                 block.getWorld().dropItemNaturally(block.getLocation(), new ItemStack(Material.IRON_INGOT));
             }
-
             if (block.getType() == Material.GOLD_ORE) {
-                event.setCancelled(true);
                 block.setType(Material.AIR);
                 block.getState().update();
                 block.getWorld().playSound(block.getLocation(), Sound.BLOCK_STONE_BREAK, 1, 1);

@@ -63,7 +63,7 @@ public final class UHCHelper extends JavaPlugin {
 
     @Override
     public void onDisable() {
-
+        cfg.save();
     }
 
     public Config getCfg() {

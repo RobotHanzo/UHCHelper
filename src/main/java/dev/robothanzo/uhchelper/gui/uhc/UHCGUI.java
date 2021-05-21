@@ -11,6 +11,7 @@ import io.papermc.lib.PaperLib;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
+import org.bukkit.GameRule;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -26,16 +27,14 @@ import java.util.stream.IntStream;
 public class UHCGUI {
     public UHCGUI(UHCHelper plugin, Player player) {
         Config cfg = plugin.getCfg();
-        ChestGui chestGui = new ChestGui(1, ChatColor.DARK_GRAY + "基本UHC設定");
-        OutlinePane pane = new OutlinePane(0, 0, 9, 1);
+        ChestGui chestGui = new ChestGui(2, ChatColor.DARK_GRAY + "基本UHC設定");
+        OutlinePane pane = new OutlinePane(0, 0, 9, 2);
 
         ItemStack countdownItem = new CustomItem(Material.PLAYER_HEAD,
                 ChatColor.DARK_RED + "玩家死亡成為旁觀者：" + MainGUI.getStatusString(cfg.getBoolean("modes.uhc.death-watcher")),
-                ChatColor.WHITE + "左鍵 切換開關");
+                ChatColor.WHITE + "任意鍵 切換開關");
         pane.addItem(new GuiItem(countdownItem, e -> {
-            if (e.isLeftClick()) {
-                cfg.setValue("modes.uhc.death-watcher", !cfg.getBoolean("modes.uhc.death-watcher"));
-            }
+            cfg.setValue("modes.uhc.death-watcher", !cfg.getBoolean("modes.uhc.death-watcher"));
             cfg.save();
             new UHCGUI(plugin, player);
         }));
@@ -106,16 +105,64 @@ public class UHCGUI {
                         }
                         currentChunk.addAndGet(1);
                         if (currentChunk.get() % 100 == 0) {
-                            player.sendActionBar(ChatColor.GREEN.toString() + ChatColor.BOLD + "跑圖進度： " + currentChunk + " / " + totalChunks);
+                            Bukkit.broadcastMessage(ChatColor.GREEN.toString() + ChatColor.BOLD + "跑圖進度： " + currentChunk + " / " + totalChunks);
                         }
                     });
                 });
+                Bukkit.broadcastMessage(ChatColor.GREEN.toString() + ChatColor.BOLD + "跑圖進度： " + totalChunks + " / " + totalChunks);
             });
+        }));
+
+        ItemStack teamDamageItem = new CustomItem(Material.GOLDEN_SWORD,
+                ChatColor.GOLD + "同隊傷害：" + MainGUI.getStatusString(cfg.getBoolean("modes.uhc.team-damage")),
+                ChatColor.WHITE + "任意鍵 切換");
+        pane.addItem(new GuiItem(teamDamageItem, e -> {
+            cfg.setValue("modes.uhc.team-damage", !cfg.getBoolean("modes.uhc.team-damage"));
+            World world = player.getWorld();
+            cfg.save();
+            new UHCGUI(plugin, player);
+        }));
+
+        ItemStack teamPushItem = new CustomItem(Material.PISTON,
+                ChatColor.GRAY + "同隊推擠：" + MainGUI.getStatusString(cfg.getBoolean("modes.uhc.team-push")),
+                ChatColor.WHITE + "任意鍵 切換");
+        pane.addItem(new GuiItem(teamPushItem, e -> {
+            cfg.setValue("modes.uhc.team-push", !cfg.getBoolean("modes.uhc.team-push"));
+            cfg.save();
+            new UHCGUI(plugin, player);
+        }));
+
+        ItemStack tabHealthItem = new CustomItem(Material.GOLDEN_APPLE,
+                ChatColor.GOLD + "TAB顯示血量：" + MainGUI.getStatusString(cfg.getBoolean("modes.uhc.tab-health")),
+                ChatColor.WHITE + "任意鍵 切換");
+        pane.addItem(new GuiItem(tabHealthItem, e -> {
+            cfg.setValue("modes.uhc.tab-health", !cfg.getBoolean("modes.uhc.tab-health"));
+            cfg.save();
+            new UHCGUI(plugin, player);
+        }));
+
+        ItemStack belowNameHealthItem = new CustomItem(Material.ENCHANTED_GOLDEN_APPLE,
+                ChatColor.GOLD + "名條下方血量：" + MainGUI.getStatusString(cfg.getBoolean("modes.uhc.below-name-health")),
+                ChatColor.WHITE + "任意鍵 切換");
+        pane.addItem(new GuiItem(belowNameHealthItem, e -> {
+            cfg.setValue("modes.uhc.below-name-health", !cfg.getBoolean("modes.uhc.below-name-health"));
+            cfg.save();
+            new UHCGUI(plugin, player);
+        }));
+
+        ItemStack achievementNotificationItem = new CustomItem(Material.KNOWLEDGE_BOOK,
+                ChatColor.GREEN + "成就廣播：" + MainGUI.getStatusString(cfg.getBoolean("modes.uhc.achievement-notification")),
+                ChatColor.WHITE + "任意鍵 切換");
+        pane.addItem(new GuiItem(achievementNotificationItem, e -> {
+            cfg.setValue("modes.uhc.achievement-notification", !cfg.getBoolean("modes.uhc.achievement-notification"));
+            cfg.save();
+            player.getWorld().setGameRule(GameRule.ANNOUNCE_ADVANCEMENTS, cfg.getBoolean("modes.uhc.achievement-notification"));
+            new UHCGUI(plugin, player);
         }));
 
         int i;
         GuiItem glassPane = MainGUI.getPlaceholdingItem();
-        for (i = 0; i < 5; i++) {
+        for (i = 0; i < 9; i++) {
             pane.addItem(glassPane);
         }
 
